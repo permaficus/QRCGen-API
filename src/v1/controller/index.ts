@@ -11,7 +11,7 @@ export const handleIncommingRequest = async (req: Request, res: Response) => {
             code: 200,
             ...payload.output === 'dataURL' && { base64file: qrcodes },
             ...payload.output === 'file' && { 
-                url: `${req.protocol}://${req.hostname}${SERVICE_PORT !== '80' ? SERVICE_PORT : ''}/api/v1/images/${payload.text}.${options.type}` 
+                url: `${req.protocol}://${req.hostname}${SERVICE_PORT !== '80' ? `:${SERVICE_PORT}`: ''}/api/v1/images/${payload.text}.${options.type}` 
             }
         })
     } catch (error: any) {
