@@ -4,7 +4,7 @@ type encodingMode = 'alphanumeric' | 'byte' | 'numeric' | 'auto'
 
 interface Payload {
     text: string
-    output: 'file' | 'fileStream' | 'dataURL' | 'canvas'
+    output: 'file' | 'stream' | 'dataURL'
     segment?: any
     encoding?: encodingMode
 }
@@ -29,7 +29,7 @@ interface RenderOptions {
 }
 
 export const generateQRCode = async (payload: Payload, options?: Options, renderType?: RenderOptions) => {
-    const outputFormat = ['file', 'canvas', 'dataURL', 'fileStream'];
+    const outputFormat = ['file', 'dataURL', 'fileStream'];
     if (!outputFormat.includes(payload.output)) {
         throw new Error('Unsupported output format');
     }
@@ -39,7 +39,8 @@ export const generateQRCode = async (payload: Payload, options?: Options, render
                 return await QRCode.toDataURL(payload.text, { ...options, rendererOpts: { ...renderType } });
             }
             case 'file': {
-                return await QRCode.toFile(`./images/${payload.text}.${options?.type}`, payload.text, { rendererOpts: { ...renderType }, ...options })
+                await QRCode.toFile(`./result/${payload.text}.${options?.type}`, payload.text, { rendererOpts: { ...renderType }, ...options });
+                break;
             }
         }
     } catch (error: any) {
