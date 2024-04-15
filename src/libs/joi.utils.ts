@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi, { ValidationError} from 'joi';
 
 const validator = async (schema: any, payload: any) => {
     return await schema.validateAsync(payload, {
@@ -8,8 +8,9 @@ const validator = async (schema: any, payload: any) => {
 };
 const _template_: any = {
     payload: Joi.object({
-        text: Joi.string().required().label('QRCode Key'),
-        output: Joi.string().valid('file', 'stream', 'dataURL').required()
+        text: Joi.string().required().label('QRCode Key').messages({'string.empty': 'Key for QR Code cannot be an empty value'}),
+        output: Joi.string().valid('file', 'stream', 'dataURL')
+            .required().messages({'string.empty': 'You must supply output method for generating QR Code'})
     }).required(),
     options: Joi.object({
         version: Joi.number().label('Version'),
@@ -21,17 +22,21 @@ const _template_: any = {
         color: Joi.object({
             dark: Joi.string().allow('').label('Color (Dark Section)'),
             light: Joi.string().allow('').label('Color (Light Section)')
-        }),
+        }).unknown(false),
         width: Joi.number().label('Width'),
         type: Joi.any().valid('svg', 'terminal', 'utf8', 'png')
+            .required()
+            .messages({
+                'any.only': 'Output type can be only PNG, SVG, UTF8 and Terminal'
+            })
     }).min(1).required(),
     renderOptions: Joi.object({
         quality: Joi.number(),
         deflateLevel: Joi.any(),
         deflateStrategy: Joi.any()
-    })
+    }).unknown(false)
 }
-export const validateSchema = async (payload: any) => {
+const validateSchema = async (payload: any) => {
     let selectedSchema: any = {}
     for (let props in payload) {
         if (_template_.hasOwnProperty(props)) {
@@ -41,3 +46,5 @@ export const validateSchema = async (payload: any) => {
     let schema = Joi.object(selectedSchema)
     return await validator(schema, payload)
 }
+
+export { validateSchema, ValidationError }
