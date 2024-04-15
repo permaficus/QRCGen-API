@@ -16,7 +16,7 @@ const _template_: any = {
         version: Joi.number().label('Version'),
         errorCorrectionLevel: Joi.string().valid('L', 'Q', 'M', 'H').label('Error Correction Level'),
         maskPattern: Joi.any().label('Mask Pattern'),
-        scale: Joi.number().label('Scale'),
+        scale: Joi.number().max(4).label('Scale'),
         margin: Joi.number().label('Margin'),
         small: Joi.number().label('Small'),
         color: Joi.object({
