@@ -22,7 +22,8 @@ const httpServerInit = async () => {
             return callback(null, true)
         }} : {}
     }))
-    httpServer.use('/v1', v1)
+    httpServer.use('/api/v1', v1);
+    httpServer.use('/api/v1/images', express.static('images'));
 }
 
 export { httpServerInit, httpServer, SERVICE_PORT, NODE_ENV }
