@@ -1,4 +1,5 @@
 import QRCode from 'qrcode'
+import Crypto from 'crypto'
 
 type encodingMode = 'alphanumeric' | 'byte' | 'numeric' | 'auto'
 
@@ -28,6 +29,12 @@ interface RenderOptions {
     deflateStrategy?: any
 }
 
+const createId = (payload: any): string => {
+    const id = Crypto.createHash('sha256');
+    id.update(payload);
+    return id.digest('hex');
+}
+
 export const generateQRCode = async (payload: Payload, options?: Options, renderType?: RenderOptions) => {
     const outputFormat = ['file', 'dataURL', 'fileStream'];
     if (!outputFormat.includes(payload.output)) {
@@ -39,8 +46,9 @@ export const generateQRCode = async (payload: Payload, options?: Options, render
                 return await QRCode.toDataURL(payload.text, { ...options, rendererOpts: { ...renderType } });
             }
             case 'file': {
-                await QRCode.toFile(`./result/${payload.text}.${options?.type}`, payload.text, { rendererOpts: { ...renderType }, ...options });
-                break;
+                const id = createId(payload.text);
+                await QRCode.toFile(`./result/${id}.${options?.type}`, payload.text, { rendererOpts: { ...renderType }, ...options });
+                return id
             }
         }
     } catch (error: any) {
