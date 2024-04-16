@@ -6,6 +6,7 @@ import {
     allowedOrigin
 } from "../constant/config"
 import { router as v1 } from '../v1/routes'
+import { jsonError } from '../v1/middleware/errHandler'
 
 const httpServer: Express = express()
 const httpServerInit = async () => {
@@ -24,6 +25,7 @@ const httpServerInit = async () => {
     }))
     httpServer.use('/api/v1', v1);
     httpServer.use('/api/v1/result', express.static('result'));
+    httpServer.use(jsonError)
 }
 
 export { httpServerInit, httpServer, SERVICE_PORT, NODE_ENV }
