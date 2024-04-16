@@ -18,7 +18,7 @@ const _template_: any = {
         maskPattern: Joi.any().label('Mask Pattern'),
         scale: Joi.number().max(4).label('Scale'),
         margin: Joi.number().label('Margin'),
-        small: Joi.number().label('Small'),
+        small: Joi.boolean().label('Small'),
         color: Joi.object({
             dark: Joi.string().allow('').label('Color (Dark Section)'),
             light: Joi.string().allow('').label('Color (Light Section)')
