@@ -10,7 +10,7 @@ export const validateRequest = async (req: Request, res: Response, next: NextFun
             res.status(400).json({
                 status: 'VALIDATION_ERROR',
                 code: 400,
-                details: error.message
+                details: error.message.replace(/"/g, '')
             }).end();
             return;
         }
