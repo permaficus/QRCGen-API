@@ -32,7 +32,7 @@ interface RenderOptions {
 const createId = (payload: any): string => {
     const id = Crypto.createHash('sha256');
     id.update(payload);
-    return id.digest('hex');
+    return id.digest('hex').substring(0, 20);
 }
 
 export const generateQRCode = async (payload: Payload, options?: Options, renderType?: RenderOptions) => {
