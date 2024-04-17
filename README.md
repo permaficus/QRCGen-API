@@ -7,7 +7,7 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 > POST /api/v1/generate
 
 <details>
-<summary>POST Body Request Attribute</summary>
+<summary>POST Body Request Attribute (Minimum)</summary>
 
 ```json
 {
