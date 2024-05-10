@@ -3,7 +3,7 @@ import Joi, { ValidationError} from 'joi';
 const validator = async (schema: any, payload: any) => {
     return await schema.validateAsync(payload, {
         abortEarly: true,
-        allowUnknow: false
+        allowUnknown: false
     })
 };
 const _template_: any = {
