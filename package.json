@@ -14,7 +14,8 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/qrcode": "^1.5.5",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.9"
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -24,11 +25,12 @@
     "helmet": "^7.1.0",
     "joi": "^17.12.3",
     "qrcode": "^1.5.3",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.4.5"
   },
   "nodemonConfig": {
     "ignore": [
-      "**/images/**"
+      "**/result/**"
     ]
   }
 }
