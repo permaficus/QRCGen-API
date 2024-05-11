@@ -1,7 +1,7 @@
 import Router from 'express'
-import { handleIncommingRequest } from '../controller';
-import { validateRequest } from '../middleware/requestValidation';
-import { errHandler, pathNotFound } from '../middleware/errHandler';
+import { handleIncommingRequest } from '@/v1/controller';
+import { validateRequest } from '@/v1/middleware/requestValidation';
+import { errHandler, pathNotFound } from '@/v1/middleware/errHandler';
 export const router = Router();
 
 /**
