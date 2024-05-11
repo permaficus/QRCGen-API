@@ -1,6 +1,6 @@
-import { generateQRCode } from "../../libs/qrcode.utils";
+import { generateQRCode } from "@/libs/qrcode.utils";
 import { Request, Response } from 'express';
-import { SERVICE_PORT } from "../../constant/config";
+import { SERVICE_PORT } from "@/constant/config";
 
 export const handleIncommingRequest = async (req: Request, res: Response) => {
     const { payload, options, renderOptions } = req.body;

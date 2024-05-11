@@ -1,4 +1,4 @@
-import { validateSchema, ValidationError } from "../../libs/joi.utils";
+import { validateSchema, ValidationError } from "@/libs/joi.utils";
 import { NextFunction, Request, Response } from "express";
 
 export const validateRequest = async (req: Request, res: Response, next: NextFunction) => {
