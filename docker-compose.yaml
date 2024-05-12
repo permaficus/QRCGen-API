@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  qrcgen:
+    container_name: qrcgen
+    network_mode: lefina-dev
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app/qrcgen-api
+      - result:/app/qrcgen-api/result
+    restart: always
+    ports:
+      - 5005:5005
+    environment:
+      - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}
+    command: npm start
+
+volumes:
+  result:
