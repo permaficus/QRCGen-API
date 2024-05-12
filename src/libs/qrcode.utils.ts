@@ -47,7 +47,7 @@ export const generateQRCode = async (payload: Payload, options?: Options, render
             }
             case 'file': {
                 const id = createId(payload.text);
-                await QRCode.toFile(`./result/${id}.${options?.type}`, payload.text, { rendererOpts: { ...renderType }, ...options });
+                await QRCode.toFile(`./qrcodes/${id}.${options?.type}`, payload.text, { rendererOpts: { ...renderType }, ...options });
                 return id
             }
         }
