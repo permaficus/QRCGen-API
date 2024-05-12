@@ -1,4 +1,4 @@
-import express, { Express } from 'express'
+import express, { Express, Request, Response, NextFunction } from 'express'
 import cors from 'cors'
 import {
     SERVICE_PORT,
@@ -6,7 +6,7 @@ import {
     allowedOrigin
 } from "@/constant/config"
 import { router as v1 } from '@/v1/routes'
-import { jsonError } from '@/v1/middleware/errHandler'
+import { fileNotFound, jsonError } from '@/v1/middleware/errHandler'
 
 const httpServer: Express = express()
 const httpServerInit = async () => {
@@ -23,9 +23,11 @@ const httpServerInit = async () => {
             return callback(null, true)
         }} : {}
     }))
+    httpServer.use('/qrcodes', express.static('qrcodes'))
+    httpServer.use('/qrcodes', fileNotFound)
     httpServer.use('/api/v1', v1);
-    httpServer.use('/api/v1/result', express.static('result'));
-    httpServer.use(jsonError)
+    httpServer.use(jsonError);
 }
 
 export { httpServerInit, httpServer, SERVICE_PORT, NODE_ENV }
+

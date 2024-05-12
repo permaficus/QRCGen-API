@@ -10,6 +10,13 @@ export const jsonError = async (err: any, req: Request, res: Response, next: Nex
         return;
     }
 }
+export const fileNotFound = async (err: any, res: Response) => {
+    res.status(404).json({
+        status: 'FILE_NOT_FOUND',
+        code: 404,
+        error_message: `File Doesn't Exist - ${err.url.substring(1, err.url.length)}`
+    })
+}
 export const pathNotFound = async (req: Request, res: Response, next: NextFunction) => {
     res.status(404);
     next(new Error(`Path Not Found - ${req.originalUrl}`));
