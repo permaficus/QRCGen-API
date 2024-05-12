@@ -1,8 +1,8 @@
 import { generateQRCode } from "@/libs/qrcode.utils";
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { SERVICE_PORT } from "@/constant/config";
 
-export const handleIncommingRequest = async (req: Request, res: Response) => {
+export const handleIncommingRequest = async (req: Request, res: Response, next: NextFunction) => {
     const { payload, options, renderOptions } = req.body;
     try {
         const qrcodes = await generateQRCode(payload, options, renderOptions);
