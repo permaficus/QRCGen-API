@@ -4,6 +4,6 @@ RUN npm install -g nodemon
 COPY package*.json .
 RUN npm install
 COPY . .
-RUN mkdir -p ./result
+RUN mkdir -p ./qrcodes
 EXPOSE 5005
 CMD [ "npm", "start" ]
