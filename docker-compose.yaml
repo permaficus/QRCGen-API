@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app/qrcgen-api
-      - result:/app/qrcgen-api/result
+      - qrcodes:/app/qrcgen-api/qrcodes
     restart: always
     ports:
       - 5005:5005
@@ -18,4 +18,4 @@ services:
     command: npm start
 
 volumes:
-  result:
+  qrcodes:
