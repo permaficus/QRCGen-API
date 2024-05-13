@@ -51,7 +51,7 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 ## Response (200 - OK)
 
 <details>
-<summary>POST - Generate</summary>
+<summary>POST - Generate (Output Type: File)</summary>
 
 ```json
 {
@@ -61,6 +61,18 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
         "image": "http://www.hostname.app/qrcodes/418cf9c5cde379f121ee.png",
         "download_link": "http://www.hostname.app/api/v1/download/418cf9c5cde379f121ee.png"
     }
+}
+```
+
+</details>
+
+<summary>POST - Generate (Output Type: dataURL / base64file)</summary>
+
+```json
+{
+    "status": "OK",
+    "code": 200,
+    "base64file": "{{base64 encoded file}}"
 }
 ```
 
