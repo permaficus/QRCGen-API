@@ -1,4 +1,4 @@
-## QR Codes Generator - API
+# QR Codes Generator - API
 
 Free and open-source, QRCGen-API is a simplified version of the typical QRcode generator. Can be used for all purposes. Users simply deploy this app or service on their backend and can immediately consume this API on their frontend
 
@@ -47,3 +47,21 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 | | `deflateLEvel` | type: `Any` | Optional |
 | | `deflateStrategy` | type: `Any` | Optional |
 | | | Both `defalateLevel` and `deflateStrategy` only works with PNG `type` options
+
+## Response (200 - OK)
+
+<details>
+<summary>POST - Generate</summary>
+
+```json
+{
+    "status": "OK",
+    "code": 200,
+    "result": {
+        "image": "http://www.hostname.app/qrcodes/418cf9c5cde379f121ee.png",
+        "download_link": "http://www.hostname.app/api/v1/download/418cf9c5cde379f121ee.png"
+    }
+}
+```
+
+</details>
