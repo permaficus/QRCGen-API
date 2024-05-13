@@ -9,6 +9,7 @@ export const jsonError = async (err: any, req: Request, res: Response, next: Nex
         }).end();
         return;
     }
+    next(err)
 }
 export const fileNotFound = async (err: any, res: Response) => {
     res.status(404).json({
