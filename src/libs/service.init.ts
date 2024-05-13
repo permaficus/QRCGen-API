@@ -23,7 +23,7 @@ const httpServerInit = async () => {
             return callback(null, true)
         }} : {}
     }))
-    httpServer.use('/qrcodes', express.static('qrcodes'))
+    httpServer.use('/qrcodes', express.static('qrcodes', { dotfiles: 'ignore' }))
     httpServer.use('/qrcodes', fileNotFound)
     httpServer.use('/api/v1', v1);
     httpServer.use(jsonError);
