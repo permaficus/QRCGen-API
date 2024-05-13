@@ -26,6 +26,7 @@ const httpServerInit = async () => {
     httpServer.use('/qrcodes', express.static('qrcodes', { dotfiles: 'ignore' }))
     httpServer.use('/qrcodes', fileNotFound)
     httpServer.use('/api/v1', v1);
+    httpServer.use('/api/v1/download', fileNotFound)
     httpServer.use(jsonError);
     httpServer.use('*', defaultNotFound)
 }
