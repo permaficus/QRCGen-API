@@ -2,6 +2,10 @@
 
 Free and open-source, QRCGen-API is a simplified version of the typical QRcode generator. Can be used for all purposes. Users simply deploy this app or service on their backend and can immediately consume this API on their frontend
 
+> [!NOTE]
+>
+> The word "QR Code" is registered trademark of: DENSO WAVE INCORPORATED
+
 ## Endpoint
 
 > POST /api/v1/generate
@@ -86,11 +90,3 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAYAAAB1PADUAAAAAklEQVR4Ae
 ```
 
 </details>
-
-## License
-
-MIT
-
-> [!NOTE]
->
-> The word "QR Code" is registered trademark of: DENSO WAVE INCORPORATED
