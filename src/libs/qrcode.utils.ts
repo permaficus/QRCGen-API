@@ -5,7 +5,7 @@ type encodingMode = 'alphanumeric' | 'byte' | 'numeric' | 'auto'
 
 interface Payload {
     text: string
-    output: 'file' | 'stream' | 'dataURL'
+    output: 'file' | 'stream' | 'base64'
     segment?: any
     encoding?: encodingMode
 }
@@ -49,13 +49,9 @@ const createId = (payload: any): string => {
 }
 
 export const generateQRCode = async (payload: Payload, options?: Options, renderType?: RenderOptions) => {
-    const outputFormat = ['file', 'dataURL', 'fileStream'];
-    if (!outputFormat.includes(payload.output)) {
-        throw new Error('Unsupported output format');
-    }
     try {        
         switch (payload.output) {
-            case 'dataURL': {
+            case 'base64': {
                 return await QRCode.toDataURL(payload.text, { ...options, rendererOpts: { ...renderType } });
             }
             case 'file': {
