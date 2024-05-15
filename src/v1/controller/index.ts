@@ -31,7 +31,11 @@ export const handleIncommingRequest = async (req: Request, res: Response, next: 
         res.status(200).json({
             status: 'OK',
             code: 200,
-            ...payload.output === 'base64' && { base64file: qrcodes },
+            ...payload.output === 'base64' && {
+                result: {
+                    base64file: qrcodes
+                }
+             },
             ...payload.output === 'file' && { 
                 result : {
                     image: `${req.protocol}://${req.hostname}${SERVICE_PORT !== '80' ? `:${SERVICE_PORT}`: ''}/qrcodes/${qrcodes}.${options.type}`,
