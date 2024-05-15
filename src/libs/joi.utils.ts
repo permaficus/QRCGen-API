@@ -9,7 +9,7 @@ const validator = async (schema: any, payload: any) => {
 const _template_: any = {
     payload: Joi.object({
         text: Joi.string().required().label('QRCode Key/Text Payload').messages({'string.empty': 'Key for QR Code cannot be an empty value'}),
-        output: Joi.string().valid('file', 'stream', 'dataURL')
+        output: Joi.string().valid('file', 'stream', 'base64')
             .required().messages({'string.empty': 'You must supply output method for generating QR Code'})
     }).required(),
     options: Joi.object({
