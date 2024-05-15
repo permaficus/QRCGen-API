@@ -13,7 +13,7 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 {
     "payload": {
         "text": "{{$randomString}}",
-        "output": "dataURL"
+        "output": "base64"
     },
     "options": {
         "type": "png",
@@ -31,7 +31,7 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 
 | Props | Key | Descriptions | Required |
 | ----- | --- | ------------ | -------- |
-| payload | `text` `output` | `text`: key for generating qr code, `output`: can be file/image or base64file format. valid value (`dataURL`, `file`) | Required |
+| payload | `text` `output` | `text`: key for generating qr code, `output`: can be file/image or base64file format. valid value (`base64`, `file`) | Required |
 | | `text` | type: `String` | Required |
 | | `output` | type: `String` | Required |
 | options | `version` | type: `Number` | Optional |
@@ -86,3 +86,11 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAYAAAB1PADUAAAAAklEQVR4Ae
 ```
 
 </details>
+
+## License
+
+MIT
+
+> [!NOTE]
+>
+> The word "QR Code" is registered trademark of: DENSO WAVE INCORPORATED
