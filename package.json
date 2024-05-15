@@ -1,15 +1,20 @@
 {
   "name": "qrc-generator",
+  "author": "Permaficus <abukhalif2019@gmail.com>",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "RESTful API for generating QRCode",
+  "main": "src/app.ts",
   "scripts": {
     "dev": "nodemon src/app.ts",
     "start": "tsc && tsc-alias && nodemon dist/src/app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "QRCode Generator",
+    "qrcode api",
+    "qrcode",
+    "qrcode generator"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
@@ -31,6 +36,7 @@
   "nodemonConfig": {
     "ignore": [
       "**/result/**"
-    ]
+    ],
+    "ext": "env, ts, js, json"
   }
 }
