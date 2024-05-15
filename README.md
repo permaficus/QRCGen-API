@@ -73,7 +73,9 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 {
     "status": "OK",
     "code": 200,
-    "base64file": "{{base64 encoded file}}"
+    "result": {
+        "base64file: "{{base64-string}}
+    }
 }
 ```
 
