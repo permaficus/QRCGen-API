@@ -1,8 +1,16 @@
-import { generateQRCode } from "@/libs/qrcode.utils";
+import { QRCodeUnknownError, generateQRCode } from "@/libs/qrcode.utils";
 import { Request, Response, NextFunction } from 'express';
 import { SERVICE_PORT } from "@/constant/config";
 import { readFile } from 'fs/promises'
 
+const errorStatus: any = {
+    400: {
+        status: 'ERR_BAD_SERVICE'
+    },
+    500: {
+        status: 'ERR_BAD_SERVICE'
+    }
+}
 export const handleIncommingRequest = async (req: Request, res: Response, next: NextFunction) => {
     if (req.method === 'GET' && req.params.filename) {
         try {
@@ -32,9 +40,13 @@ export const handleIncommingRequest = async (req: Request, res: Response, next: 
             }
         })
     } catch (error: any) {
-        res.status(400).json({
-            status: 'ERR_BAD_REQUEST',
-            code: 400,
+        let statusCode: number = 400
+        if (error instanceof QRCodeUnknownError) {
+            statusCode = error.statusCode;
+        }
+        res.status(statusCode).json({
+            status: errorStatus(statusCode).status,
+            code: statusCode,
             message: error.message
         }).end();
     }

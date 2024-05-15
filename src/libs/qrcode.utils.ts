@@ -29,6 +29,19 @@ interface RenderOptions {
     deflateStrategy?: any
 }
 
+export class QRCodeUnknownError extends Error {
+    statusCode: number
+
+    constructor(message: string, statusCode: number) {
+        super(message)
+        this.message = message
+        this.statusCode = statusCode
+        this.name = this.constructor.name
+
+        Object.setPrototypeOf(this, QRCodeUnknownError.prototype)
+    }
+}
+
 const createId = (payload: any): string => {
     const id = Crypto.createHash('sha256');
     id.update(payload);
@@ -52,6 +65,6 @@ export const generateQRCode = async (payload: Payload, options?: Options, render
             }
         }
     } catch (error: any) {
-        throw new Error(error.message)
+        throw new QRCodeUnknownError(error.message, 500)
     }
 }
