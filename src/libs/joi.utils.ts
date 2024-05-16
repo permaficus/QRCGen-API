@@ -8,9 +8,18 @@ const validator = async (schema: any, payload: any) => {
 };
 const _template_: any = {
     payload: Joi.object({
-        text: Joi.string().required().label('QRCode Key/Text Payload').messages({'string.empty': 'Key for QR Code cannot be an empty value'}),
-        output: Joi.string().valid('file', 'stream', 'base64')
-            .required().messages({'string.empty': 'You must supply output method for generating QR Code'})
+        text: Joi.string().label('QRCode Key/Text Payload').messages({'string.empty': 'Key for QR Code cannot be an empty value'}),
+        segment: Joi.array().items(Joi.object({
+            data: Joi.any().label('Segment Data'),
+            mode: Joi.string().valid('Alphanumeric', 'Byte', 'Numeric').label('Segment Mode').messages({
+                'any.only': 'Segment mode only accept [Alphanumeric, Byte, Numeric] only'
+            })
+        }).unknown(false)).messages({'any.required': 'You must specify text value in payload'})
+        .when('text', { is: Joi.exist(), then: Joi.forbidden(), otherwise: Joi.required() }).label('Segment in payload'),
+        output: Joi.string()
+            .valid('base64', 'file')
+            .label("Payload Output")
+            .messages({'string.empty': 'You must supply output method for generating QR Code'})
     }).required(),
     options: Joi.object({
         version: Joi.number().label('Version'),
