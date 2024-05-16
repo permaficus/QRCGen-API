@@ -5,7 +5,7 @@ import { readFile } from 'fs/promises'
 
 const errorStatus: any = {
     400: {
-        status: 'ERR_BAD_SERVICE'
+        status: 'ERR_BAD_REQUEST'
     },
     500: {
         status: 'ERR_BAD_SERVICE'
@@ -44,12 +44,12 @@ export const handleIncommingRequest = async (req: Request, res: Response, next: 
             }
         })
     } catch (error: any) {
-        let statusCode: number = 400
+        let statusCode: number = 500
         if (error instanceof QRCodeUnknownError) {
             statusCode = error.statusCode;
         }
         res.status(statusCode).json({
-            status: errorStatus(statusCode).status,
+            status: errorStatus[statusCode].status,
             code: statusCode,
             message: error.message
         }).end();
