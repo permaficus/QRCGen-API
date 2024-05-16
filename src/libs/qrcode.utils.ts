@@ -4,9 +4,9 @@ import Crypto from 'crypto'
 type encodingMode = 'alphanumeric' | 'byte' | 'numeric' | 'auto'
 
 interface Payload {
-    text: string
-    output: 'file' | 'stream' | 'base64'
+    text?: string
     segment?: any
+    output: 'file' | 'stream' | 'base64'
     encoding?: encodingMode
 }
 interface Options {
@@ -14,7 +14,7 @@ interface Options {
     errorCorrectionLevel?: 'L' | 'M' | 'Q' | 'H'
     maskPattern?: any
     scale?: number
-    margin?: number
+    margin?: number | 2
     small?: number
     color?: {
         dark?: string
@@ -52,15 +52,16 @@ export const generateQRCode = async (payload: Payload, options?: Options, render
     try {        
         switch (payload.output) {
             case 'base64': {
-                return await QRCode.toDataURL(payload.text, { ...options, rendererOpts: { ...renderType } });
+                return await QRCode.toDataURL(payload.text || payload.segment, { ...options, rendererOpts: { ...renderType } });
             }
             case 'file': {
-                const id = createId(payload.text);
-                await QRCode.toFile(`./qrcodes/${id}.${options?.type}`, payload.text, { rendererOpts: { ...renderType }, ...options });
+                const id = createId(payload.text || Math.random().toString());
+                //@ts-ignore
+                await QRCode.toFile(`./qrcodes/${id}.${options?.type}`, payload.text || payload.segment, { rendererOpts: { ...renderType }, ...options });
                 return id
             }
         }
     } catch (error: any) {
-        throw new QRCodeUnknownError(error.message, 500)
+        throw new QRCodeUnknownError(error.message.replace(/[",\n]/g, ''), 400)
     }
 }
