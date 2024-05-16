@@ -37,6 +37,7 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 | ----- | --- | ------------ | -------- |
 | payload | `text` `output` | `text`: key for generating qr code, `output`: can be file/image or base64file format. valid value (`base64`, `file`) | Required |
 | | `text` | type: `String` | Required |
+| | `segment` [[readme]](#segment) | type: `Object` of `Array` | Optional |
 | | `output` | type: `String` | Required |
 | options | `version` | type: `Number` | Optional |
 | | `errorCorrectionLevel` | type: `String` default: `M` | Required |
@@ -51,6 +52,29 @@ Free and open-source, QRCGen-API is a simplified version of the typical QRcode g
 | | `deflateLEvel` | type: `Any` | Optional |
 | | `deflateStrategy` | type: `Any` | Optional |
 | | | Both `defalateLevel` and `deflateStrategy` only works with PNG `type` options
+
+## Segment
+
+By default, QRCGen will automatically generate the QR Code based on `text` value on payload, and this is the preferred way to generate the QR Code.
+
+If auto mode doesn't work for you or you have specific needs, is also possible to manually specify each segment with the relative mode. In this way no segment optimizations will be applied under the hood.
+Segments list can be passed as an array of object:
+
+```json
+{
+    "payload": {
+        "segment": [
+            { "data": "ABCDE" , "mode": "Alpanumeric" },
+            { "data": "12345" , "mode": "Numeric" },
+            { "data": "?q1&q2", "mode": "Byte" }
+        ]
+    }
+}
+```
+
+> [!WARNING]
+>
+> If you specify `text` on payload, then `segment` will be an optional key/value and QRCGen will ignore or forbid this value
 
 ## Response (200 - OK)
 
